@@ -1,0 +1,885 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 非特定语言 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(936)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SolarCellTester.ico"
+IDR_SOLARCELLTESTYPE    ICON                    "res\\SolarCellTesterDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "Archivo"
+    BEGIN
+        MENUITEM "Imprimir...\tCtrl+P",         ID_FILE_PRINT
+        MENUITEM "Vista preliminar",            ID_FILE_PRINT_PREVIEW
+        MENUITEM "Configuración de impresión...", ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Salida",                      ID_APP_EXIT
+    END
+    POPUP "Vista"
+    BEGIN
+        MENUITEM "Zoom",                        32779
+        MENUITEM "Display box",                 ID_32780
+    END
+    POPUP "Administrador de usuario"
+    BEGIN
+        MENUITEM "Asignación de Potencia",      ID_ASSGINPOWER
+        MENUITEM "Cambiar de usuario",          ID_CHANGEUSER
+    END
+    POPUP "Ayuda"
+    BEGIN
+        MENUITEM "Acerca Simulador Solar ...",  ID_APP_ABOUT
+        MENUITEM "Self Check",                  ID_HELP_SELFCHECK
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 241, 134
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Acerca del Simulador Solar"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,6,7,20,20
+    DEFPUSHBUTTON   "OK",IDOK,187,8,50,16,WS_GROUP
+    LISTBOX         IDC_LIST1,4,32,233,98,NOT LBS_NOTIFY | LBS_NOINTEGRALHEIGHT | LBS_NOSEL | NOT WS_BORDER | WS_VSCROLL,WS_EX_STATICEDGE
+END
+
+IDD_DIALOG_CTRLBAR DIALOGEX 0, 0, 60, 281
+STYLE DS_SETFONT | WS_CHILD
+FONT 14, "Arial", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Pruebas",IDC_BUTTON_START,5,6,50,24,0,WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Opciones",IDC_BUTTON_OPTIONS,5,36,50,24,0,WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Intensidad Multi Sun",IDC_BUTTON_OPTIONS2,5,66,50,24,BS_MULTILINE,WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Doble IV Calcular Rs",IDC_BUTTON_OPTIONS3,5,96,50,24,BS_MULTILINE,WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Corrección Pmax",IDC_BUTTON_OPTIONS4,5,126,50,24,BS_MULTILINE,WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE
+    ICON            IDI_ICON_TEL,IDC_STATIC_TEL,4,210,20,20,NOT WS_VISIBLE
+    LTEXT           "Servicio Hotline",IDC_STATIC,6,186,49,8
+    LTEXT           "4008 160 156",IDC_STATIC,6,197,47,8
+END
+
+IDD_DLG_BASE DIALOGEX 0, 0, 436, 342
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
+CAPTION "Configuración Simulador Solar"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Salida",IDOK,320,326,50,14
+    DEFPUSHBUTTON   "aplicación",ID_SETBASE_APPLY,265,326,50,14
+    CONTROL         "",IDC_TAB_PAGE,"SysTabControl32",TCS_RAGGEDRIGHT,7,7,419,300
+    EDITTEXT        IDC_EDIT_CONFIGFILE,32,309,187,13,ES_AUTOHSCROLL
+    LTEXT           "perfil",IDC_STATIC,12,311,16,13
+    DEFPUSHBUTTON   "Busque",ID_SETBASE_BROWSE,8,326,50,14
+    DEFPUSHBUTTON   "archivo de aplicación",ID_SETBASE_APPLYUSERCONFIG,65,326,74,14
+    DEFPUSHBUTTON   "Restaurar el valor predeterminado",IDC_SETBASE_DEFAULT,142,326,121,14
+END
+
+IDD_DLGSET_DEV841 DIALOGEX 0, 0, 422, 256
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO_VOLO,101,34,48,71,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_CURR,101,15,48,80,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Grado actual",IDC_STATIC,55,16,42,10
+    LTEXT           "Grado de tensión",IDC_STATIC,42,36,55,11
+    LTEXT           "Sun intensity",IDC_STATIC,247,36,42,8
+    EDITTEXT        IDC_EDIT_SET841SUN,298,34,67,14,ES_AUTOHSCROLL
+    LTEXT           "W/m^2",IDC_STATIC,376,36,25,8
+    CONTROL         "Chequear clave externa",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,78,88,10
+    LTEXT           "Rango de intensidad de Sun",IDC_STATIC,201,16,90,8
+    LTEXT           "W/m^2",IDC_STATIC,376,16,25,8
+    EDITTEXT        IDC_EDIT1,298,15,67,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY | WS_DISABLED | NOT WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "Prueba de intervalo",IDC_STATIC,227,57,64,8
+    EDITTEXT        IDC_EDIT_SET841PERI,298,54,67,14,ES_AUTOHSCROLL
+    LTEXT           "S",IDC_STATIC,376,57,8,8
+    COMBOBOX        IDC_COMBO_DESITY,101,52,48,71,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Duración del pulso de Luz",IDC_STATIC,14,55,83,11
+    CONTROL         "Habilitar Prueba Irev",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,106,78,77,10
+    COMBOBOX        IDC_COMBO2,175,217,106,131,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Modelo de dispositivo",IDC_STATIC,295,219,69,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT2,306,76,93,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY | WS_DISABLED | NOT WS_BORDER,WS_EX_STATICEDGE
+    CONTROL         "Desactivar la alarma del contador",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,185,78,117,10
+    EDITTEXT        IDC_EDIT_SET841PERI2,88,98,67,14,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        IDC_EDIT_SET841PERI3,88,118,67,14,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        IDC_EDIT_SET841PERI4,88,138,67,14,ES_AUTOHSCROLL | WS_DISABLED
+    PUSHBUTTON      "reajustar",IDC_BUTTON1,157,98,42,14
+    PUSHBUTTON      "reajustar",IDC_BUTTON7,157,118,42,14
+    PUSHBUTTON      "reajustar",IDC_BUTTON8,157,138,42,14
+    EDITTEXT        IDC_EDIT_SET841PERI5,300,98,67,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_SET841PERI6,300,118,67,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_SET841PERI7,300,138,67,14,ES_AUTOHSCROLL
+    LTEXT           "Valor de alarma",IDC_STATIC,247,101,51,8
+    LTEXT           "Valor de alarma",IDC_STATIC,247,121,51,8
+    LTEXT           "Valor de alarma",IDC_STATIC,247,141,51,8
+    LTEXT           "Contador Total",IDC_STATIC,15,160,53,8
+    EDITTEXT        IDC_EDIT_COUNTERNAME1,15,98,67,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_COUNTERNAME2,15,118,67,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_COUNTERNAME3,15,138,67,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_SET841PERI8,88,158,67,14,ES_AUTOHSCROLL | WS_DISABLED
+END
+
+IDD_DLGSET_CURVEIV DIALOGEX 0, 0, 411, 285
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Inglés",IDC_RADIO_E,"Button",BS_AUTORADIOBUTTON | WS_GROUP,122,83,46,10
+    CONTROL         "Chino",IDC_RADIO_C,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,37,83,46,10
+    CONTROL         "N o de serie.",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,205,134,51,10
+    CONTROL         "DateTime",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,273,134,46,10
+    PUSHBUTTON      "eliminar",IDC_BUTTON6,129,269,34,14
+    CONTROL         "No limpie la casilla de entrada",IDC_CHECK_SWCLEAR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,211,77,105,10
+    PUSHBUTTON      "eliminar",IDC_BUTTON4,62,269,34,14
+    CONTROL         "Guardar un archivo CSV",IDC_CHECK_SAVEPARA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,19,88,10
+    CONTROL         "Guardar datos originales",IDC_CHECK_SAVEDAQ,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,104,19,89,10
+    CONTROL         "Guardar imagen",IDC_CHECK_SAVEJPG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,104,53,61,10
+    CONTROL         "N o de serie.",IDC_CHECK_SWSERIAL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,211,20,53,10
+    CONTROL         "NO Auto.",IDC_CHECK_SWAUTO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,211,39,43,10
+    EDITTEXT        IDC_EDIT_AUTO,363,38,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FILEPATH,75,103,258,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Ruta del Archivo",IDC_BUTTON2,7,103,62,14
+    LTEXT           "Base Auto",IDC_STATIC,317,41,34,8
+    GROUPBOX        "Contenido",IDC_STATIC,8,7,190,62
+    GROUPBOX        "N o de serie. Estilo",IDC_STATIC,200,7,208,92
+    CONTROL         "Active la casilla de entrada",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,211,58,96,10
+    EDITTEXT        IDC_EDIT1,238,205,93,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,238,241,93,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,238,223,93,14,ES_AUTOHSCROLL
+    LTEXT           "Modelo",IDC_STATIC,188,207,24,8
+    LTEXT           "Sizel",IDC_STATIC,188,226,16,8
+    LTEXT           "Fabricante",IDC_STATIC,188,244,46,8
+    LISTBOX         IDC_LIST2,63,133,48,132,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST3,115,133,48,132,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Parámetro",IDC_STATIC,9,121,34,8
+    LTEXT           "To File",IDC_STATIC,63,121,22,8
+    LTEXT           "To Display",IDC_STATIC,115,121,34,8
+    PUSHBUTTON      "To Display",IDC_BUTTON3,9,251,48,14
+    PUSHBUTTON      "To File",IDC_BUTTON5,9,269,48,14
+    LISTBOX         IDC_LIST4,9,133,48,115,LBS_MULTIPLESEL | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "DAQ y Nombre del archivo de Imagen",IDC_STATIC,187,121,146,30
+    EDITTEXT        IDC_EDIT5,196,167,129,14,ES_AUTOHSCROLL
+    GROUPBOX        "I-V Nombre de archivo de Parametros",IDC_STATIC,187,155,146,44
+    CONTROL         "Fecha de actualización",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,196,184,85,12,WS_EX_TRANSPARENT
+    CONTROL         "Guardar archivos MDB",IDC_CHECK_SAVEPARA2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,36,82,10
+    CONTROL         "Testear entrada de Ater",IDC_CHECK_SWCLEAR2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,317,58,89,10
+    GROUPBOX        "",IDC_STATIC,187,259,146,24
+    EDITTEXT        IDC_EDIT_STATE,276,265,46,14,ES_AUTOHSCROLL
+    LTEXT           "Custom state field values",IDC_STATIC,192,268,66,8
+    CONTROL         "Guardar datos calibrados",IDC_CHECK_SAVEDAQ2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,104,36,91,10
+    CONTROL         "Guardar en clase",IDC_CHECK_SAVEINCLASS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,53,65,10
+    EDITTEXT        IDC_EDIT_SNLENGTH,363,18,40,14,ES_AUTOHSCROLL
+    LTEXT           "SN Longitud",IDC_STATIC,317,22,38,8
+    CONTROL         "No serie. Unico",IDC_CHECK_SERIALUNIQUE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,319,77,59,10
+    PUSHBUTTON      "Ordenar",IDC_BUTTON_SORT,96,269,33,14
+    GROUPBOX        "Cuadro de lista Estilo",IDC_STATIC,10,72,183,27
+END
+
+IDD_DLGSET_SUNPARA DIALOGEX 0, 0, 365, 288
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Ajuste de Corriente y voltaje",IDC_STATIC,7,7,136,125
+    LTEXT           "Isc object",IDC_STATIC,15,31,46,8
+    LTEXT           "Isc Present",IDC_STATIC,15,44,46,8
+    LTEXT           "Isc Factor",IDC_STATIC,15,59,46,8
+    LTEXT           "Voc Object",IDC_STATIC,15,88,46,8
+    LTEXT           "Voc Present",IDC_STATIC,15,103,46,8
+    LTEXT           "Voc Factor",IDC_STATIC,15,119,46,8
+    EDITTEXT        IDC_EDIT_TRUEISC,65,27,40,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CURISC,65,42,40,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_SCALEISC,65,57,40,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_TRUEVOC,65,86,40,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CURVOC,65,101,40,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_SCALEVOC,65,116,40,12,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Ajuste de intensidad Sun",IDC_STATIC,150,7,181,47
+    CONTROL         "To Sun Intensity",IDC_CHECKSUNADJUST,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,158,34,66,12
+    EDITTEXT        IDC_EDIT_STDCELLISC,227,16,58,12,ES_AUTOHSCROLL | WS_DISABLED
+    CONTROL         "A",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,293,18,8,8
+    LTEXT           "STD. Cell Isc",IDC_STATIC,158,18,41,8,WS_DISABLED
+    GROUPBOX        "Temperatura de calibración. Sensor",IDC_STATIC,7,134,136,71
+    LTEXT           "Objeto",IDC_STATIC,15,159,27,8
+    LTEXT           "Presente",IDC_STATIC,15,174,29,8
+    LTEXT           "Factor",IDC_STATIC,16,189,35,8
+    EDITTEXT        IDC_EDIT_TRUETEMP,65,157,40,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CURTEMP,65,172,40,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_SCALETEMP,65,187,40,12,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Ajuste Temperatura IV",IDC_STATIC,150,54,210,102
+    EDITTEXT        IDC_EDIT_TEMPSCALECURR,230,64,40,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TEMPSCALEVOLT,230,82,40,12,ES_AUTOHSCROLL
+    LTEXT           "Current Temp. Factor",IDC_STATIC,158,68,70,8
+    LTEXT           "Voltage Tem. Factor",IDC_STATIC,158,85,65,8
+    CONTROL         "A esta temperatura.",IDC_CHECKTEMPCALI,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,281,140,77,12
+    EDITTEXT        IDC_EDIT_OBJECTTEMP,237,140,40,12,ES_AUTOHSCROLL
+    LTEXT           "Temperatura del objeto.",IDC_STATIC,158,142,79,8
+    GROUPBOX        "",IDC_STATIC,150,210,181,20
+    CONTROL         "No calibración y ajuste",IDC_CHECKDISABLECALI,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,216,129,12
+    PUSHBUTTON      "Calc",IDC_BUTTON_CALCSCALEVOC,65,73,40,11
+    PUSHBUTTON      "Calc",IDC_BUTTON_CALCSCALEISC,66,16,40,11
+    EDITTEXT        IDC_EDIT_OBJECTSUN,228,33,57,12,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        IDC_EDIT_AREA,230,100,40,14,ES_AUTOHSCROLL
+    LTEXT           "Area de Celula",IDC_STATIC,158,104,48,8
+    LTEXT           "cm^2",IDC_STATIC,280,103,19,8
+    GROUPBOX        "",IDC_STATIC,150,156,181,54
+    CONTROL         "A",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,109,29,8,8
+    CONTROL         "A",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,109,44,8,8
+    LTEXT           "V",IDC_STATIC,109,88,8,8
+    LTEXT           "V",IDC_STATIC,109,103,8,8
+    LTEXT           "℃",IDC_STATIC,110,160,8,8
+    LTEXT           "℃",IDC_STATIC,110,175,8,8
+    CONTROL         "W/m^2",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,289,35,24,8
+    PUSHBUTTON      "Calc",IDC_BUTTON_CALCSCALETEMP,65,144,40,11
+    CONTROL         "Using EnvTemp",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,158,122,63,9
+    CONTROL         "Using SurfTemp",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,235,122,66,9
+    LTEXT           "Set Vdot",IDC_STATIC,158,192,42,8
+    EDITTEXT        IDC_EDIT_VDOT,217,189,54,14,ES_AUTOHSCROLL
+    LTEXT           "V",IDC_STATIC,281,191,8,8
+    LTEXT           "Area (to Eff)",IDC_STATIC,158,171,63,8
+    EDITTEXT        IDC_EDIT_EFFAREA,217,168,54,14,ES_AUTOHSCROLL
+    LTEXT           "cm^2",IDC_STATIC,279,170,22,8
+    LTEXT           "/ Grado",IDC_STATIC,276,84,25,8
+    LTEXT           "/ Grado",IDC_STATIC,276,66,25,8
+    GROUPBOX        "Calibración de temperatura de sensor IR",IDC_STATIC,5,209,136,71
+    LTEXT           "Objeto",IDC_STATIC,15,231,27,8
+    LTEXT           "Presente",IDC_STATIC,15,247,29,8
+    LTEXT           "Factor",IDC_STATIC,15,262,35,8
+    EDITTEXT        IDC_EDIT_TRUEIRTEMP,65,230,40,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CURIRTEMP,65,245,40,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_SCALEIRTEMP,65,260,40,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "℃",IDC_STATIC,109,233,8,8
+    LTEXT           "℃",IDC_STATIC,109,248,8,8
+    PUSHBUTTON      "Calc",IDC_BUTTON_CALCSCALEIRTEMP,65,217,40,11
+END
+
+IDD_DLGSET_CHARTVIEW DIALOGEX 0, 0, 365, 256
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_RTLREADING | WS_EX_LEFTSCROLLBAR
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Habilitar AxisX Auto",IDC_XAUTO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,14,74,8,WS_EX_RTLREADING
+    CONTROL         "Habilitar AxisY Auto",IDC_YAUTO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,23,74,8,WS_EX_RTLREADING
+    CONTROL         "Ocultar Título",IDC_HIDETITLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,51,74,8,WS_EX_RTLREADING
+    CONTROL         "Ocultar AxisX Título",IDC_HIDEXTITLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,32,74,8,WS_EX_RTLREADING
+    CONTROL         "Ocultar AxisY Título",IDC_HIDEYTITLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,41,74,8,WS_EX_RTLREADING
+    CONTROL         "Ocultar Comentarios",IDC_HIDECOMMENTS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,68,74,8,WS_EX_RTLREADING
+    CONTROL         "Ocultar cuadrícula X",IDC_HIDEXGRID,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,77,74,8,WS_EX_RTLREADING
+    CONTROL         "Ocultar cuadrícula Y",IDC_HIDEYGRID,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,86,74,8,WS_EX_RTLREADING
+    CONTROL         "Ocultar PV",IDC_HIDEPV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,95,74,8,WS_EX_RTLREADING
+    EDITTEXT        IDC_XMAX,91,34,43,13,ES_AUTOHSCROLL,WS_EX_RTLREADING | WS_EX_LEFTSCROLLBAR
+    EDITTEXT        IDC_YMAX,91,55,43,13,ES_AUTOHSCROLL,WS_EX_RTLREADING | WS_EX_LEFTSCROLLBAR
+    EDITTEXT        IDC_XMIN,43,34,43,13,ES_AUTOHSCROLL,WS_EX_RTLREADING | WS_EX_LEFTSCROLLBAR
+    EDITTEXT        IDC_YMIN,43,55,43,13,ES_AUTOHSCROLL,WS_EX_RTLREADING | WS_EX_LEFTSCROLLBAR
+    GROUPBOX        "Longitud de eje",IDC_STATIC,7,7,143,102
+    LTEXT           "MIN",IDC_STATIC,43,22,33,8
+    LTEXT           "MAX",IDC_STATIC,91,22,31,8
+    LTEXT           "Eje X",IDC_STATIC,14,37,25,10
+    LTEXT           "Eje Y",IDC_STATIC,14,58,25,10
+END
+
+IDD_DLGSET_PARAGRADE DIALOGEX 0, 0, 365, 256
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "退出",IDOK,9,171,83,17
+    GROUPBOX        "分档依据",IDC_STATIC,9,9,81,107
+    EDITTEXT        IDC_EDIT_RANGRE,191,39,69,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_NAME,107,39,71,16,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST_DISLEVEL,107,62,217,119,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "添加",ID_APPEND,268,38,56,17
+    LTEXT           "档位名",IDC_STATIC,107,25,60,12
+    LTEXT           "最小值",IDC_STATIC,191,26,68,11
+    GROUPBOX        "建立档位表",IDC_STATIC,100,9,232,180
+    DEFPUSHBUTTON   "保存",ID_SAVE,9,127,83,17
+    DEFPUSHBUTTON   "打开",ID_LOAD,9,149,83,17
+    CONTROL         "短路电流",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,19,22,57,14
+    CONTROL         "最大功率",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,19,43,56,14
+    CONTROL         "效率",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,19,64,57,14
+    CONTROL         "最大功率点电流",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,19,86,57,14
+END
+
+IDD_DLGSET_PARAALARM DIALOGEX 0, 0, 424, 290
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "Dividido en un nivel",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,9,16,72,8
+    CONTROL         "Dividido en dos niveles",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,99,16,83,8
+    CONTROL         "Dividido en tres niveles",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,200,16,83,8
+    CONTROL         "Dividido en cuatro niveles",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,9,28,93,8
+    DEFPUSHBUTTON   "guardar",ID_SAVE,182,268,81,17
+    PUSHBUTTON      "Insertar",ID_INSERT,310,73,45,14
+    PUSHBUTTON      "Borrar",ID_DELETE,310,89,45,14
+    GROUPBOX        "Estilo del grado",IDC_STATIC,2,6,299,101
+    EDITTEXT        IDC_EDIT_1MIN,167,40,37,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "A?adir",ID_APPEND,310,57,45,14
+    LTEXT           "Nombre de Grado：",IDC_STATIC,307,31,57,9
+    LTEXT           "MIN",IDC_STATIC,169,31,16,8
+    DEFPUSHBUTTON   "archivo de aplicación",ID_MODIFY,92,269,81,17
+    DEFPUSHBUTTON   "Abierto",ID_LOAD,2,268,81,17
+    EDITTEXT        IDC_EDIT_1MAX,211,40,37,14,ES_AUTOHSCROLL
+    LTEXT           "MAX",IDC_STATIC,213,31,16,8
+    LTEXT           "MIN",IDC_STATIC,28,133,16,8
+    LTEXT           "MAX",IDC_STATIC,71,133,16,8
+    LTEXT           "MIN",IDC_STATIC,139,133,16,8
+    LTEXT           "MAX",IDC_STATIC,182,133,16,8
+    CONTROL         "Desactivar Mostrar",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,118,118,71,10
+    CONTROL         "Desactivar esta alarma",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,23,118,85,10
+    GROUPBOX        "Alarma",IDC_STATIC,2,109,410,24
+    CONTROL         "Desactivar el timbre",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,205,118,75,10
+    CONTROL         "No Guardar Alarma",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,298,118,72,10
+    LISTBOX         IDC_FILELIST,3,230,355,36,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "MIN",IDC_STATIC,266,133,16,8
+    LTEXT           "MAX",IDC_STATIC,309,133,16,8
+    LISTBOX         IDC_ITEMLIST,366,44,40,59,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT1A,26,159,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT1B,69,159,37,14,ES_AUTOHSCROLL
+    LTEXT           "Isc",IDC_STATIC,7,161,12,12
+    EDITTEXT        IDC_EDIT2A,26,141,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2B,69,141,37,14,ES_AUTOHSCROLL
+    LTEXT           "Voc",IDC_STATIC,7,143,11,12
+    EDITTEXT        IDC_EDIT3A,27,213,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3B,69,213,37,14,ES_AUTOHSCROLL
+    LTEXT           "Pm",IDC_STATIC,6,216,11,8
+    EDITTEXT        IDC_EDIT4A,26,177,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4B,69,177,37,14,ES_AUTOHSCROLL
+    LTEXT           "FF",IDC_STATIC,7,179,11,12
+    EDITTEXT        IDC_EDIT6A,265,141,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT6B,307,141,37,14,ES_AUTOHSCROLL
+    LTEXT           "Eff",IDC_STATIC,232,144,12,12
+    EDITTEXT        IDC_EDIT7A,26,195,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT7B,69,195,37,14,ES_AUTOHSCROLL
+    LTEXT           "Im",IDC_STATIC,7,197,12,12
+    EDITTEXT        IDC_EDIT8A,135,159,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT8B,179,159,37,14,ES_AUTOHSCROLL
+    LTEXT           "Vm",IDC_STATIC,118,162,12,12
+    EDITTEXT        IDC_EDIT9A,265,159,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT9B,307,159,37,14,ES_AUTOHSCROLL
+    LTEXT           "Rs",IDC_STATIC,232,162,12,12
+    EDITTEXT        IDC_EDIT5A,135,141,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT5B,179,141,37,14,ES_AUTOHSCROLL
+    LTEXT           "I_Id",IDC_STATIC,118,144,16,12
+    EDITTEXT        IDC_EDITAA,136,177,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITAB,179,177,37,14,ES_AUTOHSCROLL
+    LTEXT           "Rsh",IDC_STATIC,118,180,12,12
+    EDITTEXT        IDC_EDITBA,136,195,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITBB,179,195,37,14,ES_AUTOHSCROLL
+    LTEXT           "Irev",IDC_STATIC,118,196,15,12
+    EDITTEXT        IDC_EDITCA,265,177,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITCB,307,177,37,14,ES_AUTOHSCROLL
+    LTEXT           "EnvTemp",IDC_STATIC,232,180,29,12
+    EDITTEXT        IDC_EDITDA,265,195,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITDB,307,195,37,14,ES_AUTOHSCROLL
+    LTEXT           "TMod",IDC_STATIC,232,196,30,12
+    LTEXT           "Grado",IDC_STATIC,257,31,20,8
+    EDITTEXT        IDC_EDIT_1G,253,40,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_2MIN,167,56,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_2MAX,211,56,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_2G,253,56,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_3MIN,167,72,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_3MAX,211,72,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_3G,253,72,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_4MIN,167,88,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_4MAX,211,88,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_4G,253,88,37,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_1,118,40,39,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_2,118,56,39,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_3,118,72,39,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_4,118,88,39,14,ES_AUTOHSCROLL | ES_READONLY
+    LISTBOX         IDC_LIST_TYPE,5,40,35,46,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Primer Grado",IDC_STATIC,59,44,42,8
+    LTEXT           "Segundo grado",IDC_STATIC,51,60,50,8
+    LTEXT           "Tercer Grado",IDC_STATIC,58,76,43,8
+    LTEXT           "Cuarto Grado",IDC_STATIC,57,91,44,8
+    PUSHBUTTON      "Grados",IDC_BUTTON_GSTYLE,5,88,36,14
+    LTEXT           "Bases Grado",IDC_STATIC,120,31,34,8
+    PUSHBUTTON      "Actualizar",ID_UPDATA,310,41,45,14
+    EDITTEXT        IDC_EDIT_NAME,366,28,40,14,ES_AUTOHSCROLL
+    GROUPBOX        "operación Gear",IDC_STATIC,304,6,107,101
+END
+
+IDD_DIALOGBAR_FLOATDISPLAY DIALOGEX 0, 0, 68, 89
+STYLE DS_SETFONT | WS_POPUP | WS_THICKFRAME
+EXSTYLE WS_EX_STATICEDGE
+FONT 14, "Arial", 400, 0, 0x0
+BEGIN
+END
+
+IDD_DIALOG_INPUT DIALOGEX 0, 0, 392, 38
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT1,4,4,330,24
+    DEFPUSHBUTTON   "OK",IDOK,338,3,50,14
+    PUSHBUTTON      "Cancelar",IDCANCEL,338,21,50,14
+    CONTROL         "Bucle",IDC_CHECKLOOP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,4,28,43,10
+END
+
+IDD_DLGSET_LABEL DIALOGEX 0, 0, 363, 265
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Buscar nivel de Software",IDC_BUTTON1,12,12,95,18
+    LISTBOX         IDC_LIST2,12,36,294,132,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Habilitar nivel de impresión",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,186,18,120,12
+    PUSHBUTTON      "Control de Test",IDC_BUTTON7,12,175,78,18
+    EDITTEXT        IDC_EDIT_FILEPATH2,77,197,232,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Ruta del Archivo",IDC_BUTTON2,12,197,59,14
+    LTEXT           "Nombre del archivo",IDC_STATIC,12,218,62,8
+    EDITTEXT        IDC_EDIT_FILEPATH3,77,215,110,14,ES_AUTOHSCROLL
+    LTEXT           "Formato de archivo",IDC_STATIC,12,237,63,8
+    CONTROL         "CSV",IDC_CHECK_CSV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,77,236,28,11
+    CONTROL         "TXT",IDC_CHECK_TXT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,135,236,28,11
+END
+
+IDD_DEFLEVEL DIALOGEX 0, 0, 191, 70
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CHILD
+FONT 10, "宋体", 400, 0, 0x86
+BEGIN
+    CONTROL         "Eff",IDC_RADIODEF1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,6,6,36,6
+    CONTROL         "Pmax",IDC_RADIODEF2,"Button",BS_AUTORADIOBUTTON,48,6,36,6
+    CONTROL         "Iload",IDC_RADIODEF3,"Button",BS_AUTORADIOBUTTON,90,6,36,6
+END
+
+IDD_DLGSET_ DIALOGEX 0, 0, 365, 256
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 4,1,0,0
+ PRODUCTVERSION 4,1,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004e4"
+        BEGIN
+            VALUE "CompanyName", "Gsolar Power Co., Ltd."
+            VALUE "FileDescription", "Simulador Solar"
+            VALUE "FileVersion", "4, 1, 0, 0"
+            VALUE "InternalName", "Solar Simulator.exe"
+            VALUE "LegalCopyright", "(C) Gsolar Power Co., Ltd. Todos los derechos reservados."
+            VALUE "OriginalFilename", "Solar Simulator.exe"
+            VALUE "ProductVersion", "4, 1, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG_CTRLBAR, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 246
+    END
+
+    IDD_DLG_BASE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 429
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 335
+    END
+
+    IDD_DLGSET_DEV841, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 412
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 246
+    END
+
+    IDD_DLGSET_CURVEIV, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 409
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 275
+    END
+
+    IDD_DLGSET_SUNPARA, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 320
+        VERTGUIDE, 23
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 262
+        HORZGUIDE, 15
+        HORZGUIDE, 23
+        HORZGUIDE, 34
+        HORZGUIDE, 54
+        HORZGUIDE, 73
+        HORZGUIDE, 82
+        HORZGUIDE, 99
+        HORZGUIDE, 120
+        HORZGUIDE, 135
+        HORZGUIDE, 149
+        HORZGUIDE, 166
+        HORZGUIDE, 184
+        HORZGUIDE, 198
+        HORZGUIDE, 212
+        HORZGUIDE, 223
+        HORZGUIDE, 230
+        HORZGUIDE, 240
+        HORZGUIDE, 248
+    END
+
+    IDD_DLGSET_CHARTVIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 320
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 230
+    END
+
+    IDD_DLGSET_PARAGRADE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 352
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 245
+    END
+
+    IDD_DLGSET_PARAALARM, DIALOG
+    BEGIN
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 287
+    END
+
+    IDD_DIALOGBAR_FLOATDISPLAY, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 59
+    END
+
+    IDD_DIALOG_INPUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 385
+        VERTGUIDE, 246
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 31
+        HORZGUIDE, 20
+    END
+
+    IDD_DLGSET_LABEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 356
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 256
+    END
+
+    IDD_DEFLEVEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 189
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 68
+    END
+
+    IDD_DLGSET_, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 358
+        TOPMARGIN, 7
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "Solar Simulator\n\nSolarCellTes\nSolarCellTester Files (*.LAB)\n.LAB\nSolarCellTester.Document\nSolarCellTester.Document"
+    IDS_SETBASE_CALI        "Calibración"
+    IDS_SETBASE_ACQU        "Adquisición"
+    IDS_SETBASE_FILT        "Filtro de Datos"
+    IDS_SETBASE_AXIS        "Graficos"
+    IDS_SETBASE_SAVE        "Guardar datos"
+    IDS_SETBASE_LABEL       "Imprimir etiqueta"
+    IDS_REPEATPASSWORD      "Por favor, introduzca contrase?a otra vez!"
+    IDS_CSolarCellTesterAppOnAssginpower "Asigne Potencia, Editar usuario"
+    IDS_CSolarCellTesterDocOnBnClickedButtonOptions4 "Dos pruebas Pmax"
+    IDS_CSolarCellTesterDocOnHelpSelfcheck "Prueba de la luz del flash"
+    IDS_CSolarCellTesterDocOnBnClickedButtonOptions3 "Dos pruebas de RS"
+    IDS_CSolarCellTesterDocOnBnClickedButtonOptions2 
+                            "Prueba de Intensidad Multi Sun"
+    IDS_CSolarCellTesterDocOnBnClickedButtonStart "Inicio Pruebas IV"
+    IDS_CSetCurveIVSaveReg  "Guardar aplicacion y mostrar Configuración"
+    IDS_CSetChartViewSaveReg "Aplicar Configuración Gráfico IV"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Simulador Solar"
+    AFX_IDS_IDLEMESSAGE     "Listo"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CSetPrtLabelSaveReg "Aplicar configuración para impresión de etiquetas"
+    145                     "Aplicar calibración y configuración de corrección"
+    IDS_CSetParaAlarmSaveReg "Aplicar Ordenacion y configuración de alarmas"
+    IDS_CSetDev841SaveReg   "Aplicar configuración de Adquisición de Datos"
+    IDS_DEV841_LAMPCOUNTER  "Contador de lámpara"
+    IDS_DEV841_PROBECOUNTER "Contador de Sonda"
+    IDS_STR_OPEN_NOHELPFILE "帮助文档不存在"
+    IDS_CSetBaseSaveReg     "Aplicar configuración del archivo de configuración"
+END
+
+#endif    // 非特定语言 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON_TEL            ICON                    "res\\tel.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_LOGIN DIALOGEX 0, 0, 200, 82
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Login"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,41,65,50,14
+    PUSHBUTTON      "Cancelar",IDCANCEL,105,65,50,14
+    EDITTEXT        IDC_EDIT_NAME,75,8,113,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PASSWORD,75,30,113,16,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Nombre de usuario",IDC_STATIC,9,11,61,8
+    LTEXT           "Contrasena",IDC_STATIC,10,32,38,8
+    CONTROL         "Auto Name y Contrasena",IDC_MPASS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,50,97,10
+END
+
+IDD_DIALOG_USERMGE DIALOGEX 0, 0, 359, 212
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
+CAPTION "Configuración del usuario"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Borrar todo",ID_CLEAR,147,9,50,14
+    PUSHBUTTON      "Nuevo/Modificar",ID_ADD,208,70,61,14
+    LTEXT           "Nombre de usuario",IDC_STATIC,207,12,61,8
+    LTEXT           "Contrasena",IDC_STATIC,208,32,38,8
+    LTEXT           "Lista de funciones utilizables",IDC_STATIC,13,110,91,8
+    LTEXT           "Desactivar lista de funciones de Usuario",IDC_STATIC,13,12,128,8
+    LISTBOX         IDC_LDIS,13,26,183,76,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LFUNC,13,126,182,76,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LUSER,210,88,132,114,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "^",ID_TODIS,146,107,50,14
+    EDITTEXT        IDC_PW1,270,28,73,16,ES_PASSWORD | ES_AUTOHSCROLL
+    EDITTEXT        IDC_NAME,270,8,73,16,ES_AUTOHSCROLL
+    LTEXT           "Contrasena",IDC_STATIC,208,52,38,8
+    EDITTEXT        IDC_PW2,270,48,73,16,ES_PASSWORD | ES_AUTOHSCROLL
+    PUSHBUTTON      "Guardar",ID_SAVEEXIT,275,70,33,14
+    PUSHBUTTON      "Return",IDOK,312,70,30,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG_LOGIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 193
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 75
+    END
+
+    IDD_DIALOG_USERMGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 352
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 205
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\SolarCellTester.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// MARK
+//
+
+IDR_MARK                MARK                    "res\\mark.emf"
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\SolarCellTester.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SolarCellTester", "SolarCellTester\SolarCellTester.vcproj", "{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug.chs|Win32 = debug.chs|Win32
+		Debug.ENU|Win32 = Debug.ENU|Win32
+		Debug.FRH|Win32 = Debug.FRH|Win32
+		debug.spa|Win32 = debug.spa|Win32
+		Debug|Win32 = Debug|Win32
+		Release.CHS|Win32 = Release.CHS|Win32
+		Release.ENU|Win32 = Release.ENU|Win32
+		Release.FRH|Win32 = Release.FRH|Win32
+		RELEASE.SPA|Win32 = RELEASE.SPA|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.debug.chs|Win32.ActiveCfg = debug.chs|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.debug.chs|Win32.Build.0 = debug.chs|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Debug.ENU|Win32.ActiveCfg = Debug.ENU|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Debug.ENU|Win32.Build.0 = Debug.ENU|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Debug.FRH|Win32.ActiveCfg = Debug.FRH|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Debug.FRH|Win32.Build.0 = Debug.FRH|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.debug.spa|Win32.ActiveCfg = debug.spa|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.debug.spa|Win32.Build.0 = debug.spa|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Debug|Win32.ActiveCfg = Release.FRH|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Debug|Win32.Build.0 = Release.FRH|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Release.CHS|Win32.ActiveCfg = Release.CHS|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Release.CHS|Win32.Build.0 = Release.CHS|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Release.ENU|Win32.ActiveCfg = Release.ENU|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Release.ENU|Win32.Build.0 = Release.ENU|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Release.FRH|Win32.ActiveCfg = Release.FRH|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Release.FRH|Win32.Build.0 = Release.FRH|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.RELEASE.SPA|Win32.ActiveCfg = RELEASE.SPA|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.RELEASE.SPA|Win32.Build.0 = RELEASE.SPA|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Release|Win32.ActiveCfg = Release.ENU|Win32
+		{CB37BC90-14D3-47E0-8E95-6A48E1F91FE9}.Release|Win32.Build.0 = Release.ENU|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

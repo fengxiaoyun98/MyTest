@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1" xmlns:rwt="http://www.schaudin.com/xmlns/rwt11">
+  <file original="SolarCellTester.rc" source-language="en" datatype="winres" tool="RC-WinTrans" rwt:source-encoding="MBCS" rwt:crc="6b351137" target-language="zh-CN">
+    <header>
+      <rwt:crc>496114495</rwt:crc>
+      <rwt:date>2008-09-12T04:26:01Z</rwt:date>
+    </header>
+    <body>
+      <group id="Stringtable" restype="x-stringtable" rwt:crc="dea0e67c">
+        <trans-unit resname="IDS_SETBASE_CALI" id="none" restype="string" rwt:winlangid="0" rwt:crc="cb853e3d">
+          <source>Calibration</source>
+          <target state="new" />
+          <rwt:archiv>
+            <rwt:date>2008-09-12T04:26:01Z</rwt:date>
+            <rwt:user>UpdateModule</rwt:user>
+          </rwt:archiv>
+        </trans-unit>
+        <trans-unit resname="IDS_SETBASE_ACQU" id="none" restype="string" rwt:winlangid="0" rwt:crc="a8a9cd75">
+          <source>Acquisition</source>
+          <target state="new" />
+          <rwt:archiv>
+            <rwt:date>2008-09-12T04:26:01Z</rwt:date>
+            <rwt:user>UpdateModule</rwt:user>
+          </rwt:archiv>
+        </trans-unit>
+        <trans-unit resname="IDS_SETBASE_FILT" id="none" restype="string" rwt:winlangid="0" rwt:crc="7e308888">
+          <source>Data Filter</source>
+          <target state="new" />
+          <rwt:archiv>
+            <rwt:date>2008-09-12T04:26:01Z</rwt:date>
+            <rwt:user>UpdateModule</rwt:user>
+          </rwt:archiv>
+        </trans-unit>
+        <trans-unit resname="IDS_SETBASE_AXIS" id="none" restype="string" rwt:winlangid="0" rwt:crc="02c6d951">
+          <source>Chart Axis</source>
+          <target state="new" />
+          <rwt:archiv>
+            <rwt:date>2008-09-12T04:26:01Z</rwt:date>
+            <rwt:user>UpdateModule</rwt:user>
+          </rwt:archiv>
+        </trans-unit>
+        <trans-unit resname="IDS_SETBASE_SAVE" id="none" restype="string" rwt:winlangid="0" rwt:crc="cebc480d">
+          <source>Save Data</source>
+          <target state="new" />
+          <rwt:archiv>
+            <rwt:date>2008-09-12T04:26:01Z</rwt:date>
+            <rwt:user>UpdateModule</rwt:user>
+          </rwt:archiv>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
