@@ -472,6 +472,10 @@ void CSetBase::SaveUserConfig(CString filename)
 	WritePrivateProfileString(L"SaveData",L"swSavePara",str,filename);
 	str.Format(L"%d",theApp.m_userConfig.SaveData.m_swSaveParaMDB);
 	WritePrivateProfileString(L"SaveData",L"swSaveParaMDB",str,filename);
+
+	str.Format(L"%d",theApp.m_userConfig.SaveData.m_swSaveXLS);
+	WritePrivateProfileString(L"SaveData",L"swSaveXLS",str,filename);
+
 	str.Format(L"%d",theApp.m_userConfig.SaveData.m_swSerialUnique);
 	WritePrivateProfileString(L"SaveData",L"swSerialUnique",str,filename);
 	str.Format(L"%d",theApp.m_userConfig.SaveData.m_swSaveInClass);
@@ -788,6 +792,10 @@ BOOL CSetBase::ReadUserConfig(CString filename)
 	theApp.m_userConfig.SaveData.m_swSavePara = atoi(T2A(str));
 	GetPrivateProfileString(L"SaveData",L"swSaveParaMDB",L"",str.GetBuffer(MAX_PATH),MAX_PATH,filename);
 	theApp.m_userConfig.SaveData.m_swSaveParaMDB = atoi(T2A(str));
+
+	GetPrivateProfileString(L"SaveData",L"swSaveXLS",L"",str.GetBuffer(MAX_PATH),MAX_PATH,filename);
+	theApp.m_userConfig.SaveData.m_swSaveXLS = atoi(T2A(str));
+
 	GetPrivateProfileString(L"SaveData",L"swSerialUnique",L"",str.GetBuffer(MAX_PATH),MAX_PATH,filename);
 	theApp.m_userConfig.SaveData.m_swSerialUnique = atoi(T2A(str));
 	GetPrivateProfileString(L"SaveData",L"swSaveInClass",L"",str.GetBuffer(MAX_PATH),MAX_PATH,filename);

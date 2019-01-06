@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by SolarCellTesterCHS.rc
+// Used by SolarCellTesterENU.rc
 //
 #define ID_SETBASE_APPLY                2
 #define ID_TODIS                        2
@@ -264,6 +264,7 @@
 #define IDC_EDIT1                       1094
 #define IDC_CHECK_SAVEPARA3             1094
 #define IDC_CHECK_SAVEPARAXLS           1094
+#define IDC_CHECK_SAVEINCLASS2          1094
 #define IDC_CHECK4                      1095
 #define IDC_EDIT2                       1095
 #define IDC_EDIT3                       1096
