@@ -1,4 +1,4 @@
-XJCM-11A+:V7.2.0.10£¨STD-Release£©
+XJCM-11A+:V7.2.0.10 build1901130050£¨STD-Release£©
 MES:Sql server
 Identification code:EC
 system:win7 32
@@ -6,6 +6,16 @@ equipment:XJCM-11A+/11AZ+/10AS+/10ASZ+
 
 
 Change log:
+2019.1.12
+Increase FF Percentage Format Display Configuration
+
+2019.1.5
+Repair and save XLS name consistent with 9A
+Fixed the problem that checked XLS could not be remembered
+
+2019.1.3
+Increase support for XLS save format and configure it through xls. GS
+
 2017.12.18
 
 1. optimize the serial reading and authorization information, the authorization part supports the single DB file, and the Gsola packet can no longer be used.

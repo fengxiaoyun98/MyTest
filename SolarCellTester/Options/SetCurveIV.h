@@ -108,6 +108,8 @@ public:
 	unsigned long  GetAuto(void)const{return m_auto;}
 	CString GetManufacture() { CString str; str = m_manuf; return str; }
 
+	CString SignificanceParam(int mdot,double value);
+
 	BOOL GetSwSaveSQLserver(void)const{return m_SQLserver;}      //Öì·å¸Ä¶¯
 	CString   GetSwSQLserverip(){CString str; str  = m_serverip_this;return str;} 
 	CString   GetSwSQLdatabase(){CString str; str = m_database_this;return str;}

@@ -61,3 +61,5 @@ extern CSerial m_com;
 extern void DisableAllSubCtrl(CWnd *wnd);
 extern void WriteUicodeBOM(CFile &f);
 extern void SetCurExeDir();
+extern bool ReadFFPercConfig();
+extern double g_FFPrecScale;

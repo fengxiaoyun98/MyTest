@@ -26,6 +26,8 @@ CSetBase::CSetBase(CWnd* pParent /*=NULL*/)
 {
 	OpReg()->CreateKey(GetThisClassName());
 
+	ReadFFPercConfig()?g_FFPrecScale=100:g_FFPrecScale=1;
+
 	m_sunpara=new CSetSunPara();
 	m_841=new CSetDev841();
 	m_alarm=new CSetParaAlarm();
