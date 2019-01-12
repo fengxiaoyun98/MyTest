@@ -1,4 +1,4 @@
-XJCM-11A+:V7.2.0.10 build1901130050£¨STD-Release£©
+XJCM-11A+:V7.2.0.10 build1901130106£¨STD-Release£©
 MES:Sql server
 Identification code:EC
 system:win7 32
