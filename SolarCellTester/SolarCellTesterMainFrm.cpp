@@ -115,6 +115,49 @@ void CSolarCellTesterMainFrame::OnFileClose()
    DestroyWindow();
 }
 
+UINT ThreadMODBUSTCP(LPVOID lparam)
+{
+	CSolarCellTesterMainFrame *pDlg=(CSolarCellTesterMainFrame*)lparam;
+
+	//如果没有开放MODBUSTCP.gs
+	if(!ReadMODBUSTCPConfig())
+	{
+		pDlg->pcomm=&pDlg->m_comm;
+		pDlg->m_comm.Open( 2,9600,pDlg->m_comm.EvenParity,8,pDlg->m_comm.OneStopBit );
+		if( !pDlg->m_comm.IsOpen() )
+		{
+			m_LogTrace.WriteLine(_T("打开COM MODBUS RTU 失败！"));
+			return 0;
+		}
+		else
+		{
+			m_LogTrace.WriteLine(_T("打开COM MODBUS RTU 成功！"));
+		}
+
+		pDlg->m_comm.ConfigCom();
+		pDlg->timerEvent = pDlg->SetTimer( 16, 750, NULL );
+		pDlg->timerEventCLC = pDlg->SetTimer(18, 1500, NULL);
+	}
+	else
+	{
+		//如果开放MODBUSTCP.gs
+		pDlg->pcomm=new SocketClient();
+		pDlg->pcomm->InitConnect();
+		if(pDlg->pcomm->m_IsConnect)
+		{	
+			m_LogTrace.WriteLine(_T("连接MODBUS TCP 服务器成功！"));
+			pDlg->m_comm.ConfigCom();
+			pDlg->timerEvent = pDlg->SetTimer( 16, 750, NULL );
+			pDlg->timerEventCLC = pDlg->SetTimer(18, 1500, NULL);
+		}
+		else
+		{
+			m_LogTrace.WriteLine(_T("连接MODBUS TCP 服务器失败！"));
+		}
+	}
+	return 1;
+}
+
 int CSolarCellTesterMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
@@ -158,12 +201,9 @@ int CSolarCellTesterMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_StatusBar.SetPaneInfo( 0,ID_INDICATOR_1, SBPS_NORMAL, 1000 );
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	m_comm.Open( 2,9600,m_comm.EvenParity,8,m_comm.OneStopBit );
-	if( !m_comm.IsOpen() )
-	return 0;
-	m_comm.ConfigCom();
-	timerEvent = SetTimer( 16, 750, NULL );
-	timerEventCLC = SetTimer(18, 1500, NULL);
+
+	AfxBeginThread(ThreadMODBUSTCP,this,0,0,0,0);
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 //	SetTimer(1,10,0);
 	return 0;
@@ -329,21 +369,21 @@ void CSolarCellTesterMainFrame::OnTimer(UINT_PTR nIDEvent)
 			case material:
 				//if (m_comm.ReadPLC(0) == 65)
 				{
-					m_comm.WritePLC(2,45);
+					pcomm->WritePLC(2,45);
 					g_state = sendgrade;
 					//AfxGetMainWnd()->SendMessageW(WM_COMMAND,IDC_BUTTON_START,0);
 				}
 				break;		
 			case sendgrade:
-				m_comm.WritePLC(24,g_grade);
+				pcomm->WritePLC(24,g_grade);
 				g_state = testOK;
 				break;
 			case testOK:
-				m_comm.WritePLC(1,66);
+				pcomm->WritePLC(1,66);
 				g_state = 100;
 				break;
 			case Out_material:
-				m_comm.WritePLC(58,33);
+				pcomm->WritePLC(58,33);
 				g_state = 100;
 				g_grade = 0;
 				break;
@@ -351,7 +391,7 @@ void CSolarCellTesterMainFrame::OnTimer(UINT_PTR nIDEvent)
 		}
 		break;
 	case 18:
-		m_comm.WritePLC(57,1);
+		pcomm->WritePLC(57,1);
 		break;
 	}
 	CFrameWnd::OnTimer(nIDEvent);

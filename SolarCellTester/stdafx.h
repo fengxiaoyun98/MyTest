@@ -63,3 +63,6 @@ extern void WriteUicodeBOM(CFile &f);
 extern void SetCurExeDir();
 extern bool ReadFFPercConfig();
 extern double g_FFPrecScale;
+extern CString g_ModbusTcpServerIP;
+extern CString g_ModbusTcpPort;
+extern bool  ReadMODBUSTCPConfig();

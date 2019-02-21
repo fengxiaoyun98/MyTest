@@ -1394,6 +1394,14 @@
 				RelativePath=".\device\serialport.h"
 				>
 			</File>
+			<File
+				RelativePath=".\device\SocketClient.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\device\SocketClient.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="SunAds"

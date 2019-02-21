@@ -86,8 +86,8 @@ protected:
 };
 
 /////////////// The main serial port class ////////////////////////////////////
-
-class CSERIALPORT_EXT_CLASS CSerialPort
+#include "SocketClient.h"
+class CSERIALPORT_EXT_CLASS CSerialPort:public SocketClient
 {
 public:
 //Enums

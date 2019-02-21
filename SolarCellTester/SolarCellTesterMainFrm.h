@@ -63,6 +63,7 @@ public:
 	afx_msg void OnDestroy();
 public:
 	CSerialPort m_comm;
+	SocketClient *pcomm;
 	int timerEvent, timerEventCLC;
 
 public:
