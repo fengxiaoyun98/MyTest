@@ -8,7 +8,6 @@
 #include "ChartView\ChartLineSerie.h"
 
 
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -52,7 +51,12 @@ CSolarCellTesterMainFrame::CSolarCellTesterMainFrame()
 
 CSolarCellTesterMainFrame::~CSolarCellTesterMainFrame()
 {
-
+	if( pThreadPLCCtrl != NULL )
+	{
+		pThreadPLCCtrl->SuspendThread();
+		pThreadPLCCtrl->Delete();
+		pThreadMCUKeyCtrl = NULL;
+	}
 }
 
 
@@ -122,19 +126,21 @@ UINT ThreadMODBUSTCP(LPVOID lparam)
 	//如果没有开放MODBUSTCP.gs
 	if(!ReadMODBUSTCPConfig())
 	{
-		pDlg->pcomm=&pDlg->m_comm;
-		pDlg->m_comm.Open( 2,9600,pDlg->m_comm.EvenParity,8,pDlg->m_comm.OneStopBit );
-		if( !pDlg->m_comm.IsOpen() )
+		pDlg->pcomm=&m_comm;
+		m_comm.Open( 2,9600,m_comm.EvenParity,8,m_comm.OneStopBit );
+		if( !m_comm.IsOpen() )
 		{
 			m_LogTrace.WriteLine(_T("打开COM MODBUS RTU 失败！"));
+			printf("打开COM MODBUS RTU 失败！");
 			return 0;
 		}
 		else
 		{
 			m_LogTrace.WriteLine(_T("打开COM MODBUS RTU 成功！"));
+			printf("打开COM MODBUS RTU 成功！");
 		}
 
-		pDlg->m_comm.ConfigCom();
+		m_comm.ConfigCom();
 		pDlg->timerEvent = pDlg->SetTimer( 16, 750, NULL );
 		pDlg->timerEventCLC = pDlg->SetTimer(18, 1500, NULL);
 	}
@@ -146,7 +152,6 @@ UINT ThreadMODBUSTCP(LPVOID lparam)
 		if(pDlg->pcomm->m_IsConnect)
 		{	
 			m_LogTrace.WriteLine(_T("连接MODBUS TCP 服务器成功！"));
-			pDlg->m_comm.ConfigCom();
 			pDlg->timerEvent = pDlg->SetTimer( 16, 750, NULL );
 			pDlg->timerEventCLC = pDlg->SetTimer(18, 1500, NULL);
 		}
@@ -200,10 +205,26 @@ int CSolarCellTesterMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_StatusBar.GetStatusBarCtrl().SetText(_T(""), 1, SBT_OWNERDRAW); 
 	m_StatusBar.SetPaneInfo( 0,ID_INDICATOR_1, SBPS_NORMAL, 1000 );
 
+
+	/////////////////////////////////////////////////////////////////////////////
+	//判断是不是智能IO卡
+	int portIO = 0;
+	if(m_SmartIOControl.GetGlassIO(portIO))
+	{
+		m_comm.Open(portIO,9600,m_comm.NoParity,8,m_comm.OneStopBit);
+		if(m_comm.IsOpen() )
+		{
+			m_comm.ConfigCom();
+			m_SmartIOControl.Reset();
+			pThreadPLCCtrl = AfxBeginThread(ThreadPLCCtrl,this,0,0,0,0);
+		}
+
+		return 0;
+	}
+
+	//否则为普通PLC
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	AfxBeginThread(ThreadMODBUSTCP,this,0,0,0,0);
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 //	SetTimer(1,10,0);
 	return 0;
@@ -395,6 +416,139 @@ void CSolarCellTesterMainFrame::OnTimer(UINT_PTR nIDEvent)
 		break;
 	}
 	CFrameWnd::OnTimer(nIDEvent);
+}
+
+
+UINT ThreadPLCCtrl(LPVOID lparam)
+{
+	CSolarCellTesterMainFrame *pDlg=(CSolarCellTesterMainFrame*)lparam;
+	unsigned char mSignalX1=0xFF;
+	unsigned char mSignalX2=0xFF;
+	unsigned char mSignalX3=0xFF;
+	unsigned char mSignalX4=0xFF;
+	TimerUS usTime;
+	int mErrorLoop=0;
+
+	while(m_comm.IsOpen())
+	{
+			//printf("m_ThreadPLCSTA=%d,g_autoTest=%d \n",theApp.m_solarDoc->m_ThreadPLCSTA,g_autoTest);
+			//if(true == theApp.m_solarDoc->m_AlarmRet)continue;
+			switch(theApp.m_solarDoc->m_ThreadPLCSTA)
+			{
+			case THREAD_PLC_O_S://清空上次条码数据，呼出输入条码框;
+									printf("-g_ThreadPLCSTA=THREAD_PLC_O_S; \n");
+									theApp.m_solarDoc->m_iv.SetSerial(_T(""));
+									//pDlg->PostMessageW(WM_COMMAND,IDC_OPEN_SERIAL,0);
+									
+									theApp.m_solarDoc->m_ThreadPLCSTA = THREAD_PLC_R_P;
+									break;
+			case THREAD_PLC_R_P://读到位信号								
+								  pDlg->m_SmartIOControl.GetIOPutIn(mSignalX1,mSignalX2,mSignalX3,mSignalX4);
+								  printf("-g_ThreadPLCSTA=THREAD_PLC_R_P;%X  %X  %X  %X\n",mSignalX1,mSignalX2,mSignalX3,mSignalX4);
+								  if(0x00 == mSignalX4 || 0x00 == mSignalX2)
+								  {
+									   pDlg->m_SmartIOControl.Reset();
+								  }
+								  if(0x00 == mSignalX1)
+								  {
+									// HWND m_hWnd = ::FindWindow(NULL, L"Input");//得到目标窗口句柄
+								    //::PostMessage(m_hWnd, WM_KEYDOWN, VK_RETURN, 0);
+									//::PostMessage(m_hWnd, WM_KEYUP, VK_RETURN, 0);
+									theApp.m_solarDoc->m_ThreadPLCSTA = THREAD_PLC_FREE;
+									pDlg->SendMessageW(WM_COMMAND,IDC_BUTTON_START,0);
+								  }
+								 break;
+			case THREAD_PLC_T_OK://测试完成OK
+								   printf("-g_ThreadPLCSTA=THREAD_PLC_T_OK; \n");
+								   mErrorLoop=0;
+								   pDlg->m_SmartIOControl.SetIOPin(g_grade,true,false,false,pDlg->m_SmartIOControl.IO_NULL_LED,false);
+								   theApp.m_solarDoc->m_ThreadPLCSTA=THREAD_PLC_R_C;
+								 break;
+			case THREAD_PLC_T_NG://测试完成NG
+								  printf("-g_ThreadPLCSTA=THREAD_PLC_T_NG; \n");
+								  g_grade = pDlg->m_SmartIOControl.m_error_grade;
+									if(true == g_autoTest)
+									{
+					  					 if(++mErrorLoop>=3)
+										  {
+											  mErrorLoop=0;
+											  theApp.m_solarDoc->m_ThreadPLCSTA=THREAD_PLC_T_OK;
+										  }
+										 else
+										 {
+										  pDlg->m_SmartIOControl.SetIOPin(g_grade,false,true,false,pDlg->m_SmartIOControl.IO_RED_LED,true);
+										  usTime.Reset();
+										  theApp.m_solarDoc->m_ThreadPLCSTA=THREAD_PLC_ALARMTIME;
+										 }
+									}
+									else
+									{
+										  pDlg->m_SmartIOControl.SetIOPin(g_grade,false,true,false,pDlg->m_SmartIOControl.IO_RED_LED,true);
+										  usTime.Reset();
+										  theApp.m_solarDoc->m_ThreadPLCSTA=THREAD_PLC_ALARMTIME;
+									}
+								 break;
+			case THREAD_PLC_ALARMTIME://报警时长
+									printf("-g_ThreadPLCSTA=THREAD_PLC_ALARMTIME; \n");
+									if(usTime.GetLost()>pDlg->m_SmartIOControl.m_alarm_time)
+									{
+										if(true == g_autoTest)
+										{
+											  pDlg->m_SmartIOControl.SetIOPin(g_grade,false,true,false,pDlg->m_SmartIOControl.IO_NULL_LED,false);
+											  theApp.m_solarDoc->m_ThreadPLCSTA = THREAD_PLC_R_P;
+										}
+										else
+										{
+											pDlg->m_SmartIOControl.SetIOPin(g_grade,false,true,false,pDlg->m_SmartIOControl.IO_NULL_LED,false);
+											theApp.m_solarDoc->m_ThreadPLCSTA = THREAD_PLC_FREE;
+										}
+									}
+									/*
+									else//中途有复位信号
+									{
+										pDlg->m_SmartIOControl.GetIOPutIn(mSignalX1,mSignalX2,mSignalX3,mSignalX4);
+										printf("-g_ThreadPLCSTA=THREAD_PLC_ALARMTIME;%X  %X  %X  %X\n",mSignalX1,mSignalX2,mSignalX3,mSignalX4);
+										if(0x00 == mSignalX4 || 0x00 == mSignalX2)
+										{
+										   pDlg->m_SmartIOControl.Reset();
+										   if(true == g_autoTest)
+										   {
+												theApp.m_solarDoc->m_ThreadPLCSTA = THREAD_PLC_R_P;
+											}
+											else
+											{
+												theApp.m_solarDoc->m_ThreadPLCSTA = THREAD_PLC_FREE;
+											}
+										}
+									}
+									*/
+									 break;
+			case THREAD_PLC_R_C://读清零命令
+									if(true == g_autoTest)
+									{
+										theApp.m_solarDoc->m_ThreadPLCSTA = THREAD_PLC_O_S;
+									}
+									else
+									{
+										theApp.m_solarDoc->m_ThreadPLCSTA = THREAD_PLC_FREE;
+									}
+
+									break;
+			case THREAD_PLC_FREE:
+								pDlg->m_SmartIOControl.GetIOPutIn(mSignalX1,mSignalX2,mSignalX3,mSignalX4);
+								 printf("-g_ThreadPLCSTA=THREAD_PLC_FREE;%X  %X  %X   %X \n",mSignalX1,mSignalX2,mSignalX3,mSignalX4);
+								if(0x00 == mSignalX4|| 0x00 == mSignalX2)
+								{
+									pDlg->m_SmartIOControl.Reset();
+								}
+								break;
+			default:break;
+							
+		}
+
+		Sleep(300);
+	}
+	return 1;
 }
 
 void CSolarCellTesterMainFrame::OnDestroy()

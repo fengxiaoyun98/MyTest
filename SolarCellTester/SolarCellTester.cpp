@@ -14,6 +14,20 @@
 #endif
 
 
+#include <io.h>
+#include <fcntl.h>
+//################################################################################控制台调用程序开始
+	void InitConsoleWindow()
+	{
+		int nCrt = 0;
+		FILE* fp;
+		AllocConsole();
+		nCrt = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE), _O_TEXT);
+		fp = _fdopen(nCrt, "w");
+		*stdout = *fp;
+		setvbuf(stdout, NULL, _IONBF, 0);
+	}
+//################################################################################控制台调用程序结束
 // CSolarCellTesterApp
 
 BEGIN_MESSAGE_MAP(CSolarCellTesterApp, CWinApp)
@@ -264,6 +278,11 @@ BOOL CSolarCellTesterApp::InitInstance()
 
 	memset(m_fc,0,sizeof(m_fc));
 	g_strvalue = _T("");
+
+	if(PathFileExists(_T("DEBUG.gs")))
+	{
+		InitConsoleWindow();
+	}
 
 	//一打开软件就读取功能码
 	if( !m_com.AutoOpenPort(g_strvalue))

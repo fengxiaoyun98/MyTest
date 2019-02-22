@@ -54,14 +54,14 @@ void SocketClient::InitConnect()
     if(SOCKET_ERROR == retVal)
     {
 		m_IsConnect = false;
-        printf("connect PLC socketserver failed!\n");
+        printf("connect PLC Modbus TCP socketserver failed!\n");
         closesocket(g_sHostScoket); //关闭套接字
         WSACleanup(); //释放套接字资源
     }
 	else
 	{
 		m_IsConnect = true;
-		printf("connect PLC socketserver sucess!\n");
+		printf("connect PLC Modbus TCP socketserver sucess!\n");
 
 	}
 }
@@ -200,6 +200,20 @@ int SocketClient::RecvData(char *recvbuf,int len,int revlen)
 	return 1;
 }
 
+int SocketClient::ReadSignelData(char *recvbuf,int revlen)
+{
+	WORD mtempdata=0;
+	if(revlen<11)return -1;
+	if(recvbuf[6]==0x01 && recvbuf[7]==0x03)
+	{
+		 mtempdata = MAKEWORD(recvbuf[10],recvbuf[9]);
+
+		 printf("ReadSignelData:%d \r\n",mtempdata);
+
+	}
+	return mtempdata;
+}
+
 UINT ThreadGetSerial(LPVOID lparam)
 {
 	SocketClient *pDlg=(SocketClient*)lparam;
@@ -236,11 +250,77 @@ UINT ThreadGetSerial(LPVOID lparam)
 int SocketClient::WritePLC(unsigned int addr, unsigned int val)
 {
 
+    char SendBuf[12] = {0};
+	SendBuf[0] = 0;//事务元标识符,高字节在前,低字节在后
+	SendBuf[1] = 0;
+	SendBuf[2] = 0;//协议标识符,高字节在前,低字节在后
+	SendBuf[3] = 0;
+	SendBuf[4] = 0x00;//后续字节长度,高字节在前,低字节在后
+	SendBuf[5] = 0x06;
+	SendBuf[6] = 01;//单元标识符
+	SendBuf[7] = 0x06;//m_cmdword;//命令字
+	SendBuf[8] = HIBYTE(addr);//数据起始地址,高字节在前,低字节在后
+	SendBuf[9] = LOBYTE(addr);
+	SendBuf[10] = HIBYTE(0x01);//数据长度,高字节在前,低字节在后
+	SendBuf[11] = LOBYTE(0x01);
+	int ret = send(g_sHostScoket, SendBuf, 12, 0);
+	Sleep(100);
+	DWORD dwBytesRead = 0;
+	ioctlsocket(g_sHostScoket, FIONREAD, &dwBytesRead);
+	if(dwBytesRead>0)
+	{
+		char *recvbuf=new char[dwBytesRead];
+			 //先清空接收缓冲区
+			 recv(g_sHostScoket, recvbuf, dwBytesRead, 0);//
+#ifdef _DEBUG
+			 printf("dwBytesRead:%d \r\n",dwBytesRead);
+			 for(int x=0;x<dwBytesRead;x++)
+			 {
+				printf("%02X ",recvbuf[x]);
+			 }
+			 printf("\r\n");
+#endif
+			 
+	}
 	return 1;
 }
 
 unsigned int SocketClient::ReadPLC(unsigned int addr)
 {
+
+   char SendBuf[12] = {0};
+	SendBuf[0] = 0;//事务元标识符,高字节在前,低字节在后
+	SendBuf[1] = 0;
+	SendBuf[2] = 0;//协议标识符,高字节在前,低字节在后
+	SendBuf[3] = 0;
+	SendBuf[4] = 0x00;//后续字节长度,高字节在前,低字节在后
+	SendBuf[5] = 0x06;
+	SendBuf[6] = 01;//单元标识符
+	SendBuf[7] = 0x03;//m_cmdword;//命令字
+	SendBuf[8] = HIBYTE(addr);//数据起始地址,高字节在前,低字节在后
+	SendBuf[9] = LOBYTE(addr);
+	SendBuf[10] = HIBYTE(0x01);//数据长度,高字节在前,低字节在后
+	SendBuf[11] = LOBYTE(0x01);
+	int ret = send(g_sHostScoket, SendBuf, 12, 0);
+	Sleep(100);
+	DWORD dwBytesRead = 0;
+	ioctlsocket(g_sHostScoket, FIONREAD, &dwBytesRead);
+	if(dwBytesRead>0)
+	{
+		char *recvbuf=new char[dwBytesRead];
+			 //先清空接收缓冲区
+			 recv(g_sHostScoket, recvbuf, dwBytesRead, 0);//
+#ifdef _DEBUG
+			 printf("dwBytesRead:%d \r\n",dwBytesRead);
+			 for(int x=0;x<dwBytesRead;x++)
+			 {
+				printf("%02X ",recvbuf[x]);
+			 }
+			 printf("\r\n");
+#endif
+			return ReadSignelData(recvbuf,dwBytesRead);
+			 
+	}
 
 	return 0;
 }

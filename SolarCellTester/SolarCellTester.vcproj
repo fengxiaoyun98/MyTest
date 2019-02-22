@@ -1395,6 +1395,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\device\SmartIOControl.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\device\SmartIOControl.h"
+				>
+			</File>
+			<File
 				RelativePath=".\device\SocketClient.cpp"
 				>
 			</File>

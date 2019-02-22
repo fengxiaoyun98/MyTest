@@ -22,6 +22,7 @@ public:
 	virtual unsigned int ReadPLC(unsigned int addr);
 
 	void InitConnect();
+	int ReadSignelData(char *recvbuf,int revlen);
 public:
 	~SocketClient(void);
 };

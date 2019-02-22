@@ -39,6 +39,8 @@ CSolarCellTesterDoc::CSolarCellTesterDoc()
 	m_ivcurve=NULL;
 	m_setbase=&theApp.m_opt;
 	m_setcal=m_setbase->GetSetSunPara();
+	theApp.m_solarDoc=this;
+	m_ThreadPLCSTA = THREAD_PLC_FREE;
 	CString str;
 	str.LoadString(IDS_CSolarCellTesterDocOnHelpSelfcheck);
 	theApp.RegFunction(L"CSolarCellTesterDoc::OnHelpSelfcheck",str);

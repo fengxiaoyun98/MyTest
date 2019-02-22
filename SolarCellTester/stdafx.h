@@ -66,3 +66,8 @@ extern double g_FFPrecScale;
 extern CString g_ModbusTcpServerIP;
 extern CString g_ModbusTcpPort;
 extern bool  ReadMODBUSTCPConfig();
+extern 	CSerialPort m_comm;
+extern CWinThread      * pThreadPLCCtrl;
+extern bool g_autoTest;
+
+enum{THREAD_PLC_FREE=1000,THREAD_PLC_O_S,THREAD_PLC_R_P,THREAD_PLC_T_OK,THREAD_PLC_T_NG,THREAD_PLC_ALARMTIME,THREAD_PLC_R_C,THREAD_PLC_ERROR,THREAD_PLC_TESTING};

@@ -32,6 +32,8 @@ public:
 	CSetSunPara* m_setcal;
 	USHORT m_cmd;
 
+	int m_ThreadPLCSTA;
+
 // Operations
 public:
 

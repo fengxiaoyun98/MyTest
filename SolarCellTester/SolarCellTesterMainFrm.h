@@ -10,9 +10,10 @@
 #include "ColoredStatusBarCtrl.h"
 
 //#include "device/serialport.h"
+#include "device/SmartIOControl.h"
 
 UINT ThreadMCUKeyCtrl(LPVOID lparam);
-
+UINT ThreadPLCCtrl(LPVOID lparam);
 
 class CSolarCellTesterMainFrame : public CFrameWnd
 {
@@ -28,6 +29,7 @@ public:
 
 	CDefLevel m_zoom;
 
+	CSmartIOControl m_SmartIOControl;
 
 	CSolarCellTesterCtrlBar m_wndSolarCellTesterCtrlBar;
 	CColoredStatusBarCtrl m_StatusBar; 
@@ -62,7 +64,6 @@ public:
 	afx_msg void OnUpdatestatus(CCmdUI *pCmdUI);
 	afx_msg void OnDestroy();
 public:
-	CSerialPort m_comm;
 	SocketClient *pcomm;
 	int timerEvent, timerEventCLC;
 

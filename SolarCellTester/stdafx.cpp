@@ -8,6 +8,10 @@ double g_FFPrecScale=0;
 CString g_ModbusTcpServerIP;
 CString g_ModbusTcpPort;
 bool  ReadMODBUSTCPConfig();
+CSerialPort m_comm;
+CWinThread      * pThreadPLCCtrl;
+bool g_autoTest;
+
 //全局变量、函数声明
 void SetCurExeDir()
 {
